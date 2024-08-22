@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <title>Weather App With JavaScript</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="search-box">
+            <input id="inputBox" type="text" placeholder="Enter city name">
+            <button id="SearchBtn" class="fa fa-search"></button>
+        </div>
+        <div class="error">
+            <h1>Sorry, Location not found!!!</h1>
+            <img src="image/404.png" alt="city not found">
+        </div>
+        <div class="weather-condition">
+            <img src="image/clear.png" alt="Weather Icon" class="weather_img">
+            <div class="temp"> 0 °C </div>
+            <div class="condition">heavy rain</div>
+        </div>
+        <div class="weather-detail">
+            <div class="humidity">
+                <i class="fa fa-tint" aria-hidden="true"></i>
+                <div class="text">
+                <span id="humidity">40%</span>
+                <p>Humidity</p>
+            </div>
+            </div>
+            <div class="wind-speed">
+                <i class="fa fa-wind" aria-hidden="true"></i>
+                <div class="text">
+                <span id="wind-speed">12 Km/H</span>
+                <p>Wind-speed</p>
+            </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
