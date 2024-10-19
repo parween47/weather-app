@@ -1,74 +1,84 @@
-let inputBox = document.getElementById("inputBox");
-let searchBtn = document.getElementById("SearchBtn");
-let weather_img = document.querySelector(".weather_img");
-let temp = document.querySelector(".temp");
-let condition = document.querySelector(".condition");
-let humidity = document.getElementById("humidity");
-let wind = document.getElementById("wind-speed");
-let location_not_found = document.querySelector(".error");
-let weather_condition = document.querySelector(".weather-condition");
-let weather_detail = document.querySelector(".weather-detail");
-let card = document.querySelector(".card");
-let body = document.querySelector("body");
-
-searchBtn.addEventListener("click", () => {
-  checkWeather(inputBox.value);
+// Get elements from the DOM
+var inputBox = document.getElementById("inputBox");
+var searchBtn = document.getElementById("SearchBtn");
+var weatherImg = document.querySelector(".weather_img");
+var temp = document.querySelector(".temp");
+var condition = document.querySelector(".condition");
+var humidity = document.getElementById("humidity");
+var wind = document.getElementById("wind-speed");
+var locationNotFound = document.querySelector(".error");
+var weatherCondition = document.querySelector(".weather-condition");
+var weatherDetail = document.querySelector(".weather-detail");
+var card = document.querySelector(".card");
+var body = document.querySelector("body");
+// Add event listener to the search button
+searchBtn.addEventListener("click", function () {
+    checkWeather(inputBox.value);
 });
+// Function to check weather based on city name
 function checkWeather(city) {
-  const api_key = `f89ab436160afb31f7222a20213e5908`;
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`;
-  fetch(url)
-    .then((response) => response.json())
-    .then((weather_data) => {
-      if (weather_data.cod == "404") {
-        location_not_found.style.display = "flex";
-        weather_condition.style.display = "none";
-        weather_detail.style.display = "none";
-        card.style.background = " #c5c4c4";
-        body.style.background = "white";
-        return;
-      }
-      location_not_found.style.display = "none";
-      weather_condition.style.display = "flex";
-      weather_detail.style.display = "flex";
-      card.style.background = "";
-      body.style.background = "";
-      temp.innerHTML = Math.round(weather_data.main.temp - 273.15) + " °C ";
-      condition.innerHTML = weather_data.weather[0].description;
-      humidity.innerHTML = weather_data.main.humidity + " %";
-      wind.innerHTML = weather_data.wind.speed + " km/H";
-      console.log(weather_data);
-      switch (weather_data.weather[0].main) {
-        case "Clouds":
-          weather_img.src = "image/clouds.png";
-          break;
-        case "Cloud-Day":
-          weather_img.src = "image/cloudy-day.png";
-          break;
-        case "Clear":
-          weather_img.src = "image/clear.png";
-          break;
-        case "Snow":
-          weather_img.src = "image/snow.png";
-          break;
-        case "Thunderstorm":
-          weather_img.src = "image/thunderstorm.png";
-          break;
-        case "Rain":
-          weather_img.src = "image/rain.png";
-          break;
-        case "Windy":
-          weather_img.src = "image/Windy.png";
-          break;
-        case "Haze":
-          weather_img.src = "image/haze.png";
-          break;
-        case "Moon":
-          weather_img.src = "image/full-moon.png";
-          break;
-        case "Cloudy-Night":
-          weather_img.src = "image/cloudy-night.png";
-          break;
-      }
+    var apiKey = "f89ab436160afb31f7222a20213e5908";
+    var url = "https://api.openweathermap.org/data/2.5/weather?q=".concat(city, "&appid=").concat(apiKey);
+    fetch(url)
+        .then(function (response) { return response.json(); })
+        .then(function (weatherData) {
+        if (weatherData.cod === "404") {
+            locationNotFound.style.display = "flex";
+            weatherCondition.style.display = "none";
+            weatherDetail.style.display = "none";
+            card.style.background = "#c5c4c4";
+            body.style.background = "white";
+            return;
+        }
+        locationNotFound.style.display = "none";
+        weatherCondition.style.display = "flex";
+        weatherDetail.style.display = "flex";
+        card.style.background = "";
+        body.style.background = "";
+        temp.innerHTML = Math.round(weatherData.main.temp - 273.15) + " °C ";
+        condition.innerHTML = weatherData.weather[0].description;
+        humidity.innerHTML = weatherData.main.humidity + " %";
+        wind.innerHTML = weatherData.wind.speed + " km/H";
+        console.log(weatherData);
+        switch (weatherData.weather[0].main) {
+            case "Clouds":
+                weatherImg.src = "image/clouds.png";
+                break;
+            case "Cloud-Day":
+                weatherImg.src = "image/cloudy-day.png";
+                break;
+            case "Clear":
+                weatherImg.src = "image/clear.png";
+                break;
+            case "Snow":
+                weatherImg.src = "image/snow.png";
+                break;
+            case "Thunderstorm":
+                weatherImg.src = "image/thunderstorm.png";
+                break;
+            case "Rain":
+                weatherImg.src = "image/rain.png";
+                break;
+            case "Windy":
+                weatherImg.src = "image/Windy.png";
+                break;
+            case "Haze":
+                weatherImg.src = "image/haze.png";
+                break;
+            case "Moon":
+                weatherImg.src = "image/full-moon.png";
+                break;
+            case "Cloudy-Night":
+                weatherImg.src = "image/cloudy-night.png";
+                break;
+            default:
+                weatherImg.src = ""; // Optional: fallback for unrecognized weather
+                break;
+        }
+    })
+        .catch(function (error) {
+        console.error("Error fetching weather data:", error);
+        locationNotFound.style.display = "flex"; // Show error message
     });
 }
+"";
